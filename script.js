@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const recipient = "deeptykgupta@gmail.com";
       const mailSubject = encodeURIComponent(subject);
       const mailBody = encodeURIComponent(
-        "Name: " + name + "\\nEmail: " + email + "\\n\\n" + message
+        "Name: " + name + "\nEmail: " + email + "\n\n" + message
       );
 
       formSuccess.textContent = "Your email application will open with your message ready to send.";
