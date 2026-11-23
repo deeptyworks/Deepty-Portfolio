@@ -156,15 +156,42 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (isValid) {
-      // This is a frontend-only form: no server or database is connected.
-      // In a real deployment this is where a fetch() call to a backend
-      // or an email service (like EmailJS or Formspree) would go.
-      formSuccess.textContent = "Thank you, " + name + "! Your message has been received.";
-      contactForm.reset();
+      // No server is connected. Prepare the message in the visitor's email app.
+      const recipient = "deeptykgupta@gmail.com";
+      const mailSubject = encodeURIComponent(subject);
+      const mailBody = encodeURIComponent(
+        "Name: " + name + "\\nEmail: " + email + "\\n\\n" + message
+      );
+
+      formSuccess.textContent = "Your email application will open with your message ready to send.";
+      window.location.href = "mailto:" + recipient +
+        "?subject=" + mailSubject + "&body=" + mailBody;
     }
   });
 
-  /* ---------- 5. DYNAMIC CURRENT YEAR IN FOOTER ---------- */
+  /* ---------- 5. SCROLL-REVEAL ANIMATION ---------- */
+  // Elements fade and slide in once as they enter the viewport.
+  const revealTargets = document.querySelectorAll(
+    ".section-title, .about-grid, .skill-card, .project-card, .contact-grid"
+  );
+
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("revealed");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealTargets.forEach(function (element) {
+      element.classList.add("reveal");
+      revealObserver.observe(element);
+    });
+  }
+
+  /* ---------- 6. DYNAMIC CURRENT YEAR IN FOOTER ---------- */
   document.getElementById("currentYear").textContent = new Date().getFullYear();
 
 });
