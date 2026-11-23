@@ -29,8 +29,9 @@
   --color-border: #E1E5EA;
 
   /* Typography */
-  --font-heading: 'Sora', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 
   /* Spacing */
   --section-padding: 6rem 1.5rem;
@@ -442,10 +443,16 @@ textarea:focus-visible {
 }
 
 .project-card {
-  background-color: var(--color-surface);
+  background: linear-gradient(145deg, #FFFFFF 0%, #EAF4F0 100%);
   border: 1px solid var(--color-border);
+  border-top: 4px solid transparent;
+  border-image: linear-gradient(90deg, var(--color-navy), var(--color-accent)) 1;
   border-radius: var(--radius);
   padding: 2rem;
+}
+
+.project-card.project-featured {
+  background: linear-gradient(145deg, #FFFFFF 0%, #DCEFE7 55%, #D5E3F0 100%);
 }
 
 .project-featured {
@@ -580,6 +587,35 @@ textarea:focus-visible {
   color: #FFFFFF;
   font-size: 0.9rem;
 }
+
+/* ---------- 12. SYNOPSIS FEATURES: mono labels and scroll-reveal ---------- */
+.project-tech,
+.timeline-meta,
+.skill-tags li,
+.project-tag,
+.contact-label,
+.hero-greeting {
+  font-family: var(--font-mono);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .cursor { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* Prevent long email/URL text from forcing sideways scroll on very narrow phones */
 
 /* ---------- 11. RESPONSIVE MEDIA QUERIES ---------- */
 
